@@ -11,12 +11,11 @@
 #import <objc/message.h>
 #import "StudentForwarding.h"
 #import "StudentNormalForwarding.h"
+
+
 @implementation Student
 
-//- (void)sendMessage:(NSString *)word {
-//    NSLog(@"%@",word);
-//}
-
+@dynamic name;
 
 /**
 在异常抛出前，Objective-C 的运行时会给你三次拯救程序的机会,依次的顺序为：
@@ -50,6 +49,10 @@ static void sendMessage(id obj, SEL _cmd, NSString* word) {
     NSLog(@"sendMessage -- %@",word);
 }
 
+static void setName(id object, SEL _cmd, NSString *name) {
+    NSLog(@"setName -- %@",name);
+}
+
 //动态解析实例方法
 + (BOOL)resolveInstanceMethod:(SEL)sel {
 //block方法创建解析方法
@@ -63,6 +66,13 @@ static void sendMessage(id obj, SEL _cmd, NSString* word) {
     if (sel == @selector(sendMessage:)) {
         //self.class:当self是实例对象的时候，返回的是类对象，否则则返回自身。
         class_addMethod([self class], sel, (IMP)sendMessage, "v@:");
+        return YES;
+    }
+    
+    //判断sel是否为 setName：
+    if (sel == @selector(setName:)) {
+        class_addMethod([self class], sel, (IMP)setName, "v@:");
+        return YES;
     }
     
     return YES;

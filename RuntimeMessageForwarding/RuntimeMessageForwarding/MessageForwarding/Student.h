@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Student : NSObject
+
+@property(nonatomic, copy) NSString *name;
+
 - (void)sendMessage:(NSString *)word;
 
 + (void)classSendMessage:(NSString *)word;

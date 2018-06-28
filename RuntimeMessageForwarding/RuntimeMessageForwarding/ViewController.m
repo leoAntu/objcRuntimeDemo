@@ -22,20 +22,24 @@
     //实例方法
     Student *obj = [Student new];
     
-    [obj sendMessage:@"haha"];
+//    [obj sendMessage:@"haha"];
+//
+//    [obj forwardingSendMessage:@"haha"];
+//
+//    [obj normalForwardingSendMessage:@"hehe"];
+//
+//    [obj doesNotNormalForwardingSendMessage:@"sdf"];
+//
+//
+//    //类方法
+//    [Student classSendMessage:@"hehe"];
+//
+//    //未实现btn，不进行消息转发会崩溃
+//    [self.btn addTarget:self action:@selector(btnClickAction:) forControlEvents:UIControlEventTouchUpInside];
+//
     
-    [obj forwardingSendMessage:@"haha"];
-    
-    [obj normalForwardingSendMessage:@"hehe"];
-    
-    [obj doesNotNormalForwardingSendMessage:@"sdf"];
-    
-
-    //类方法
-    [Student classSendMessage:@"hehe"];
-    
-    //未实现btn，不进行消息转发会崩溃
-    [self.btn addTarget:self action:@selector(btnClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    //dynamic方法解析
+    obj.name = @"sdf";
 }
 
 
