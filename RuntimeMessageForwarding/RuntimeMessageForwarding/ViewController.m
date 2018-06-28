@@ -40,6 +40,7 @@
     
     //dynamic方法解析
     obj.name = @"sdf";
+    NSLog(@"%@",obj.name);
 }
 
 

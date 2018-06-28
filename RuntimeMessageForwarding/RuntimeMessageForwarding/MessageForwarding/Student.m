@@ -13,7 +13,9 @@
 #import "StudentNormalForwarding.h"
 
 
-@implementation Student
+@implementation Student {
+    NSString* _name;
+}
 
 @dynamic name;
 
@@ -41,16 +43,26 @@
 
 /**
  imp方法
- @param obj 对象
+ @param self 对象
  @param _cmd 方法名称
  @param word 参数
  */
-static void sendMessage(id obj, SEL _cmd, NSString* word) {
+static void sendMessage(id self, SEL _cmd, NSString* word) {
     NSLog(@"sendMessage -- %@",word);
 }
 
-static void setName(id object, SEL _cmd, NSString *name) {
+static void setName(id self, SEL _cmd, NSString *name) {
+
     NSLog(@"setName -- %@",name);
+    if (((Student *)self)->_name != name) {
+//        [((Student *)self)->_name release];
+        ((Student *)self)->_name = [name copy];
+
+    }
+}
+
+NSString* getName(id self, SEL _cmd) {
+    return ((Student *)self)->_name;
 }
 
 //动态解析实例方法
@@ -75,6 +87,11 @@ static void setName(id object, SEL _cmd, NSString *name) {
         return YES;
     }
     
+    if (sel == @selector(name)) {
+        class_addMethod([self class], sel, (IMP)getName, "@@:");
+        return YES;
+    }
+
     return YES;
 }
 
